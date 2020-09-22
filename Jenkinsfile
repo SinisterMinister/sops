@@ -15,10 +15,6 @@ pipeline {
             ]]
         )
     }
-    // Setup upstream triggers
-    triggers { 
-        upstream(upstreamProjects: "/devops/packer-centos-java/master", threshold: hudson.model.Result.SUCCESS)
-    }
     stages {
         stage('Build Image') {
             steps {
