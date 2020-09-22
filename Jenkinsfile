@@ -24,7 +24,7 @@ pipeline {
             steps {
                 container('builder') {
                     sh "docker build -t hub.flatirons.cloud/docker/sops:latest ."
-                    sh "docker hub.flatirons.cloud/docker/sops:latest"
+                    sh "docker push hub.flatirons.cloud/docker/sops:latest"
                 }
             }
         }
