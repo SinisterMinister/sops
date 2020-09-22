@@ -23,6 +23,10 @@ pipeline {
         stage('Build Image') {
             steps {
                 container('builder') {
+                    withCredentials([usernamePassword(credentialsId: "nexus-builder", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh "docker login -u $USERNAME -p $PASSWORD hub.flatirons.cloud"
+                    }
+
                     sh "docker build -t hub.flatirons.cloud/docker/sops:latest ."
                     sh "docker push hub.flatirons.cloud/docker/sops:latest"
                 }
