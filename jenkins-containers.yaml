@@ -4,6 +4,7 @@ spec:
     - name: builder
       image: hub.flatirons.cloud/docker/builder:no-cache
       tty: true
+      imagePullPolicy: Always
       args:
         - dockerd-entrypoint.sh dockerd && cat
       command:
@@ -11,3 +12,8 @@ spec:
         - "-c"
       securityContext:
         privileged: true
+      resources:
+        requests:
+          cpu: 1000m
+        limits:
+          cpu: 2000m
