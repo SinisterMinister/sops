@@ -1,0 +1,13 @@
+metadata:
+spec:
+  containers:
+    - name: builder
+      image: hub.flatirons.cloud/docker/builder:no-cache
+      tty: true
+      args:
+        - dockerd-entrypoint.sh dockerd && cat
+      command:
+        - "/bin/sh"
+        - "-c"
+      securityContext:
+        privileged: true
