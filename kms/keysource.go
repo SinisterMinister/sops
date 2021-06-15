@@ -171,12 +171,8 @@ func (key MasterKey) createStsSession(config aws.Config, sess *session.Session) 
 	}
 	sanitizedHostname := stsRoleSessionNameRe.ReplaceAllString(hostname, "")
 	stsService := sts.New(sess)
-	name := "sops@" + sanitizedHostname
-
-	// Make sure the name is no longer than 64 characters (role session name length limit from AWS)
-	if len(name) >= 64 {
-		name = name[0:63]
-	}
+	// Make sure the name isn't too long as to interfere with KMS
+	name := fmt.Sprintf("sops@%.32s", sanitizedHostname)
 
 	out, err := stsService.AssumeRole(&sts.AssumeRoleInput{
 		RoleArn: &key.Role, RoleSessionName: &name})
