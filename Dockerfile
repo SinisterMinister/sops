@@ -1,4 +1,4 @@
-FROM golang:1.14 as build
+FROM golang:1.15
 
 COPY . /go/src/go.mozilla.org/sops
 WORKDIR /go/src/go.mozilla.org/sops
